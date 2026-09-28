@@ -1,0 +1,22 @@
+{
+  "name": "qlapp-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/game-records.test.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create qlapp-db",
+    "db:init": "wrangler d1 execute qlapp-db --file=./schema.sql --remote",
+    "db:init:local": "wrangler d1 execute qlapp-db --file=./schema.sql"
+  },
+  "dependencies": {
+    "hono": "^4.7.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260911.1",
+    "typescript": "^5.7.0",
+    "wrangler": "^4.0.0"
+  }
+}

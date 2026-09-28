@@ -1,0 +1,21 @@
+# 把这个文件复制成 keys.properties 再填。
+#
+# keys.properties 已经在 .gitignore 里，**不会被提交**——你的后端地址和密钥
+# 只存在你自己机器上。仓库里只保留这份示例。
+#
+#     cp keys.properties.example keys.properties
+#
+# 三个值都会被编译进 App（Gradle 的 buildConfigField），改完要重新 Build。
+
+# 后端地址。跑完 `node backend/setup.mjs` 会打印出来，
+# 形如 https://qlapp-backend.<你的子域>.workers.dev；
+# 如果绑了自定义域名就填自定义域名。
+BASE_URL=https://your-worker.workers.dev
+
+# 共享密钥。必须和后端 Cloudflare secret 里的 APP_KEY 完全一致。
+# setup.mjs 会自动生成一个并打印出来，抄过来即可。
+APP_KEY=change-me
+
+# 「在一起的那天」，毫秒时间戳（UTC）。只在本地没存过时当兜底默认值，
+# 之后可以在网页管理后台随时改。下面是个占位日期（2025-01-01），改成你们自己的。
+ANNIVERSARY=1735689600000

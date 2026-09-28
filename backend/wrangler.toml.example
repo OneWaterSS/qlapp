@@ -1,0 +1,42 @@
+name = "qlapp-backend"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+
+# 保留 workers.dev 入口（自定义域名出问题时还有退路）
+workers_dev = true
+
+# ---------------------------------------------------------------------------
+# 自定义域名（可选）
+#
+# workers.dev 在国内会被限流，想直连就绑自己的域名。绑之前要先把域名加到
+# Cloudflare 并且 NS 生效，然后：
+#
+#     node add-domain.mjs api.你的域名.com
+#
+# 那个脚本会自动把下面这段 routes 写进来并重新部署，**不用手改**。
+# 所以这里默认是注释掉的——直接 `wrangler deploy` 会得到一个 workers.dev 地址，
+# 先跑起来看看效果完全够用。
+# ---------------------------------------------------------------------------
+# routes = [
+#   { pattern = "api.example.com", custom_domain = true }
+# ]
+
+# D1：任务 / 照片索引 / 日记 / 留言 / 五子棋等结构化数据
+# `node setup.mjs` 会自动创建数据库并把 database_id 填进来
+[[d1_databases]]
+binding = "DB"
+database_name = "qlapp-db"
+database_id = "D1_ID_PLACEHOLDER"
+
+# KV：存照片原图（新账号不用激活 R2，KV 开箱即用）
+# `node setup.mjs` 会自动创建命名空间并把 id 填进来
+[[kv_namespaces]]
+binding = "PHOTOS"
+id = "KV_ID_PLACEHOLDER"
+
+# 管理网页是纯静态 HTML，让 wrangler 当成文本打包进来，
+# 这样 src/index.ts 里直接 import 就能返回，不用额外配静态资源托管。
+[[rules]]
+type = "Text"
+globs = ["**/*.html"]
+fallthrough = true

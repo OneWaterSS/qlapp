@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   Sample backup rules file; uncomment and customize as necessary.
+   See https://developer.android.com/guide/topics/data/autobackup
+   for details.
+   Note: This file is ignored for devices older than API 31
+   See https://developer.android.com/about/versions/12/backup-restore
+-->
+<full-backup-content>
+    <!-- 下载/上传时在 cacheDir 建过一次的图（含 3000×3000 解码后的 bitmap 缓存）没有备份价值 -->
+    <exclude domain="cache" path="image_cache" />
+    <exclude domain="external" path="Android/data/com.example.qlapp" />
+</full-backup-content>
